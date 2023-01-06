@@ -1,24 +1,15 @@
 import {
   DeleteOutline,
   SaveOutlined,
-  TextFieldsRounded,
   UploadOutlined,
 } from "@mui/icons-material";
-import {
-  Button,
-  Grid,
-  IconButton,
-  Input,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 import { ImageGallery } from "../components";
 import { useForm } from "../../hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useRef } from "react";
 import {
   setActiveNote,
-  setSaving,
   startDeletingNote,
   startSavingNote,
   startUploadingFiles,
@@ -89,7 +80,8 @@ export const NoteView = () => {
           disabled={isSaving}
           onClick={() => fileInputRef.current.click()}
         >
-          <UploadOutlined />
+          <UploadOutlined sx={{ fontsize: 5, mr: 1 }} />
+          Sube Imagenes
         </IconButton>
         <Button onClick={onSaveNote} color="primary" sx={{ padding: 2 }}>
           <SaveOutlined sx={{ fontsize: 30, mr: 1 }} />

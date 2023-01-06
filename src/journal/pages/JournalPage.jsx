@@ -8,7 +8,7 @@ import { NoteView, NothingSelectedView } from "../views";
 export const JournalPage = () => {
   const dispatch = useDispatch();
 
-  const { isSaving, active } = useSelector((state) => state.journal);
+  const { isSaving, active, sideBar } = useSelector((state) => state.journal);
   const onClickNewNote = () => {
     dispatch(startNewNote());
   };

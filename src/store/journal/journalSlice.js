@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const journalSlice = createSlice({
   name: "journal",
   initialState: {
+    sideBar: true,
     isSaving: false,
     messageSaved: "",
     notes: [],
@@ -25,6 +26,7 @@ export const journalSlice = createSlice({
     setActiveNote: (state, action) => {
       state.active = action.payload;
       state.messageSaved = "";
+      state.sideBar = false;
     },
     setNotes: (state, action) => {
       state.notes = action.payload;
@@ -60,6 +62,9 @@ export const journalSlice = createSlice({
       state.active = null;
       state.notes = state.notes.filter((note) => action.payload !== note.id);
     },
+    stateActivate: (state, action) => {
+      state.sideBar = action.payload;
+    },
   },
 });
 export const {
@@ -72,4 +77,5 @@ export const {
   savingNewNote,
   setPhotosToActiveNote,
   clearNotesLogout,
+  stateActivate,
 } = journalSlice.actions;

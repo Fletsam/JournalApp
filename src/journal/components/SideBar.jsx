@@ -1,8 +1,9 @@
-import { TurnedInNot } from "@mui/icons-material";
+import { MenuOutlined, TurnedInNot } from "@mui/icons-material";
 import {
   Divider,
   Drawer,
   Grid,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
@@ -12,13 +13,19 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { stateActivate } from "../../store/journal";
 import { SideBarItem } from "./";
 
 export const SideBar = ({ drawerWidth }) => {
+  const dispatch = useDispatch();
   const { displayName } = useSelector((state) => state.auth);
-  const { notes, active } = useSelector((state) => state.journal);
+  const { notes, active, sideBar } = useSelector((state) => state.journal);
+  const [hideBar, setHideBar] = useState(false);
+  const onHideSidebar = () => {
+    dispatch(stateActivate(false));
+  };
 
   return (
     <Box
@@ -26,7 +33,7 @@ export const SideBar = ({ drawerWidth }) => {
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
     >
       <Drawer
-        open={!active}
+        open={sideBar}
         sx={{
           display: { xs: "block" },
           "& .MuiDrawer-paper": {
@@ -39,6 +46,9 @@ export const SideBar = ({ drawerWidth }) => {
           <Typography variant="h6" noWrap component="div">
             {displayName}
           </Typography>
+          <IconButton onClick={onHideSidebar} color="inherit" sx={{ mr: 2 }}>
+            <MenuOutlined />
+          </IconButton>
         </Toolbar>
         <Divider />
         <List>

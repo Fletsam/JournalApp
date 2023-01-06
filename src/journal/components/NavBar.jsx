@@ -1,31 +1,35 @@
 import { LogoutOutlined, MenuOutlined } from "@mui/icons-material";
 import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../../store/auth/thunks";
-import { setActiveNote } from "../../store/journal";
+import {
+  savingNewNote,
+  setActiveNote,
+  stateActivate,
+} from "../../store/journal";
 
 export const NavBar = ({ drawerWidth = 240 }) => {
   const dispatch = useDispatch();
-
   const onLogout = () => {
     dispatch(startLogout());
   };
 
   const onSideBar = () => {
-    dispatch(setActiveNote());
+    dispatch(stateActivate(true));
   };
 
   return (
     <AppBar
       position="fixed"
       sx={{
-        width: { sm: `calc(100% - ${drawerWidth}px)` },
+        width: { xl: "100%" },
         ml: { sm: `${drawerWidth}px` },
       }}
     >
       <Toolbar>
-        <IconButton color="inherit" sx={{ mr: 2, display: { sm: "none" } }}>
-          <MenuOutlined onClick={onSideBar} />
+        <IconButton onClick={onSideBar} color="inherit" sx={{ mr: 2 }}>
+          <MenuOutlined />
         </IconButton>
         <Grid
           container
