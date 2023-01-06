@@ -18,7 +18,7 @@ import { SideBarItem } from "./";
 
 export const SideBar = ({ drawerWidth }) => {
   const { displayName } = useSelector((state) => state.auth);
-  const { notes } = useSelector((state) => state.journal);
+  const { notes, active } = useSelector((state) => state.journal);
 
   return (
     <Box
@@ -26,11 +26,13 @@ export const SideBar = ({ drawerWidth }) => {
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
     >
       <Drawer
-        variant="permanent"
-        open
+        open={!active}
         sx={{
           display: { xs: "block" },
-          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
+            width: drawerWidth,
+          },
         }}
       >
         <Toolbar>

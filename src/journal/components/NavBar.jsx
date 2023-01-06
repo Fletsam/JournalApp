@@ -2,12 +2,17 @@ import { LogoutOutlined, MenuOutlined } from "@mui/icons-material";
 import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { startLogout } from "../../store/auth/thunks";
+import { setActiveNote } from "../../store/journal";
 
 export const NavBar = ({ drawerWidth = 240 }) => {
   const dispatch = useDispatch();
 
   const onLogout = () => {
     dispatch(startLogout());
+  };
+
+  const onSideBar = () => {
+    dispatch(setActiveNote());
   };
 
   return (
@@ -20,7 +25,7 @@ export const NavBar = ({ drawerWidth = 240 }) => {
     >
       <Toolbar>
         <IconButton color="inherit" sx={{ mr: 2, display: { sm: "none" } }}>
-          <MenuOutlined />
+          <MenuOutlined onClick={onSideBar} />
         </IconButton>
         <Grid
           container
